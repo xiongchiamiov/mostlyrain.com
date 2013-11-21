@@ -17,10 +17,33 @@
 							mp3: "rain.mp3",
 							oga: "rain.ogg"
 						});
+						$(this).jPlayer('play');
 					},
+					loop: true,
 					swfPath: "/jQuery.jPlayer.2.5.0",
 					supplied: "mp3, oga"
 				});
+				var timeTilSurprise = function() {
+				   var max = 60;
+					var min = 15;
+					return 1000 * Math.random() * (max - min) + min;
+				};
+				var blowAndReset = function() {
+					$('#jquery_jplayer_1').jPlayer('setMedia', {
+						mp3: 'air-horn.mp3',
+						oga: 'air-horn.ogg'
+					});
+					$('#jquery_jplayer_1').jPlayer('play');
+					setTimeout(function() {
+						$('#jquery_jplayer_1').jPlayer('setMedia', {
+							mp3: 'rain.mp3',
+							oga: 'rain.ogg'
+						});
+						$('#jquery_jplayer_1').jPlayer('play');
+						setTimeout(blowAndReset, timeTilSurprise());
+					}, 1800);
+				};
+				setTimeout(blowAndReset, timeTilSurprise());
 			});
 		</script>
 	</head>
